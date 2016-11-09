@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inglesos" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e390194-8931-484c-b42e-7d8af502b51b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM registro WHERE DATE(date) = DATE(NOW())]]>
+	</queryString>
+	<field name="no" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="norecibo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingreso" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gasto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serv" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="suma_ingreso" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ingreso}]]></variableExpression>
+	</variable>
+	<variable name="suma_egresos" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{gasto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="97" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="752" height="97" uuid="9249c355-ae8c-437a-811e-bf978e077afc"/>
+				<imageExpression class="java.lang.String"><![CDATA["reportes/banner_blanco_cebc.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="0" width="140" height="20" uuid="e59aebfc-593a-4c9b-9534-8d47df77485d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="240" height="20" uuid="ba666003-ccb5-48b9-a1fc-1a401539e043"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="102" height="20" uuid="7b70ba6b-21aa-45c2-ba2d-a412bf9d2e57"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora y Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="0" width="102" height="20" uuid="99b07c61-c4e5-49d4-b2f4-6690933bc07d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="688" y="0" width="65" height="20" uuid="c6c31700-3ee3-4dac-b121-2dd55ef2f38b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Gasto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20" uuid="77e40175-28f6-41a5-ae39-619e502ff463"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="623" y="0" width="65" height="20" uuid="1cd21daa-c7c3-42e1-8bf8-6df20605b863"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Ingreso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="1" width="40" height="20" uuid="e2e24159-467e-45ad-a175-2a7b574bec40"/>
+				<textFieldExpression><![CDATA[$F{norecibo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="1" width="140" height="20" uuid="ad7fc335-670a-4c9b-be6c-896aa93dba15"/>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="1" width="240" height="20" uuid="63abef86-2472-4fe4-92b4-3fa4e38e1a3f"/>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="1" width="102" height="20" uuid="93dda2c6-bb9b-4a2f-98a0-1cc8cfad4e22"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="522" y="1" width="102" height="20" uuid="fe142e6e-e51e-4073-b824-88aad9c324be"/>
+				<textFieldExpression><![CDATA[$F{serv}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Q #,##0.00" isBlankWhenNull="true">
+				<reportElement x="623" y="1" width="65" height="20" uuid="f0f46583-8397-4a15-a7ed-e8be696fc501"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Q #,##0.00" isBlankWhenNull="true">
+				<reportElement x="688" y="1" width="65" height="20" uuid="aabf66a4-c0c0-4bb7-8534-86435b3fecf4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gasto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="51">
+			<textField pattern="Q #,##0.00" isBlankWhenNull="true">
+				<reportElement x="688" y="0" width="65" height="20" forecolor="#FF0000" uuid="848a77d1-08cf-4ef2-8d5f-956232d650e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{suma_egresos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Q #,##0.00" isBlankWhenNull="true">
+				<reportElement x="624" y="20" width="128" height="20" forecolor="#20B801" uuid="5ae30a29-3496-4624-bde7-6d9a2616783d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{suma_ingreso}-$V{suma_egresos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Q #,##0.00" isBlankWhenNull="true">
+				<reportElement x="623" y="0" width="65" height="20" forecolor="#0002FF" uuid="1f811dae-1f83-4c8b-8505-a438746ae419"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{suma_ingreso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
