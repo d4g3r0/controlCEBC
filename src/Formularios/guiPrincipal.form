@@ -1057,7 +1057,7 @@
                                                       <Component id="cob_check_clausura" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace pref="85" max="32767" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="iconState" min="-2" pref="217" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -1115,13 +1115,8 @@
                                               </Group>
                                               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="cob_colegiatura" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
-                                                  <Component id="jLabel28" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="cob_colegiatura" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="jLabel28" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2911,10 +2906,11 @@
                     <Component class="javax.swing.JComboBox" name="alumnosEstado">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="3">
+                          <StringArray count="4">
                             <StringItem index="0" value="Inscrito"/>
                             <StringItem index="1" value="Retirado"/>
-                            <StringItem index="2" value=" "/>
+                            <StringItem index="2" value="Online"/>
+                            <StringItem index="3" value="Otro"/>
                           </StringArray>
                         </Property>
                       </Properties>

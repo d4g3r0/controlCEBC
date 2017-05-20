@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-06-04T09:48:10 -->
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-27T18:00:02 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaCobro" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af1ffa1c-4aa4-4fa6-b49a-aaff512092e0">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CJM"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="mes" class="java.lang.String">
 		<defaultValueExpression><![CDATA["jan"]]></defaultValueExpression>
 	</parameter>
@@ -12,23 +12,23 @@
 	<parameter name="jornada" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-inscripciones_2016.nom,
-inscripciones_2016.ape,
-inscripciones_2016.grado,
-((IFNULL(inscripciones_2016.ins,0)+(IFNULL(inscripciones_2016.mens,0)* $P{num} ))-(IFNULL(cuotas_2016.ins,0)+IFNULL(cuotas_2016.jan,0)+IFNULL(cuotas_2016.feb,0)+IFNULL(cuotas_2016.mar,0)+IFNULL(cuotas_2016.apr,0)+IFNULL(cuotas_2016.may,0)+IFNULL(cuotas_2016.jun,0)+IFNULL(cuotas_2016.jul,0)+IFNULL(cuotas_2016.ago,0)+IFNULL(cuotas_2016.sep,0)+IFNULL(cuotas_2016.oct,0)+IFNULL(cuotas_2016.nov,0)))AS TOTAL
+inscripciones_2017.nom,
+inscripciones_2017.ape,
+inscripciones_2017.grado,
+((IFNULL(inscripciones_2017.ins,0)+(IFNULL(inscripciones_2017.mens,0)* $P{num} ))-(IFNULL(cuotas_2017.ins,0)+IFNULL(cuotas_2017.jan,0)+IFNULL(cuotas_2017.feb,0)+IFNULL(cuotas_2017.mar,0)+IFNULL(cuotas_2017.apr,0)+IFNULL(cuotas_2017.may,0)+IFNULL(cuotas_2017.jun,0)+IFNULL(cuotas_2017.jul,0)+IFNULL(cuotas_2017.ago,0)+IFNULL(cuotas_2017.sep,0)+IFNULL(cuotas_2017.oct,0)+IFNULL(cuotas_2017.nov,0)))AS TOTAL
 FROM
-inscripciones_2016
+inscripciones_2017
 INNER JOIN
-cuotas_2016
+cuotas_2017
 ON
-inscripciones_2016.cod=cuotas_2016.cod
+inscripciones_2017.cod=cuotas_2017.cod
 WHERE
-cuotas_2016. $P!{mes}  IS NULL 
+cuotas_2017. $P!{mes}  IS NULL 
 AND
-inscripciones_2016.jornada= $P{jornada}
+inscripciones_2017.jornada= $P{jornada}
 AND
-inscripciones_2016.estado='inscrito' 
-ORDER BY inscripciones_2016.grado]]>
+inscripciones_2017.estado='inscrito' 
+ORDER BY inscripciones_2017.grado]]>
 	</queryString>
 	<field name="nom" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

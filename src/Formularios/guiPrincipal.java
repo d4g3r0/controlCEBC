@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -2206,7 +2207,7 @@ public String name;
                                                             .addComponent(cob_check_noviembre))))
                                                 .addGap(8, 8, 8)
                                                 .addComponent(cob_check_clausura)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(iconState, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
                                         .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2250,11 +2251,8 @@ public String name;
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGap(12, 12, 12))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cob_colegiatura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                    .addComponent(cob_colegiatura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
                         .addGap(0, 12, Short.MAX_VALUE)
@@ -3040,7 +3038,7 @@ public String name;
 
         jLabel65.setText("Estado:");
 
-        alumnosEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inscrito", "Retirado", " " }));
+        alumnosEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inscrito", "Retirado", "Online", "Otro" }));
         alumnosEstado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 alumnosEstadoItemStateChanged(evt);
@@ -3658,24 +3656,30 @@ public String name;
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void ven_tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ven_tabla1MouseClicked
-        if(evt.getClickCount()==1){
+        if (evt.getClickCount() == 1) {
             ven_btnSelectProduct.setEnabled(true);
-        }else if(evt.getClickCount()==2){
-            String[] venta=new String[4];
+        } else if (evt.getClickCount() == 2) {
+            String[] venta = new String[4];
             int fila = ven_tabla1.getSelectedRow();
-            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad"));
-            venta[0]=String.valueOf(ven_tabla1.getValueAt(fila, 0));
-            venta[1]=String.valueOf(ven_tabla1.getValueAt(fila, 1));
-            venta[2]=String.valueOf(cantidad);
-            venta[3]=String.valueOf(Double.parseDouble((String)ven_tabla1.getValueAt(fila, 2))*cantidad);
-            ((DefaultTableModel)ven_tabla2.getModel()).addRow(venta);
-            Double acu=0.0;
-            for(int i=0;i<ven_tabla2.getRowCount();i++){
-                acu=acu+Double.parseDouble((String)ven_tabla2.getValueAt(i, 3));
+            Object[] numero = {"1","2","3","4","5"};
+            JComboBox x = new JComboBox(numero);
+            x.setEditable(true);
+            String cantidad;
+            cantidad = String.valueOf(JOptionPane.showInputDialog(null,"ingrese cantidad","Cantidad",JOptionPane.PLAIN_MESSAGE,null,numero,"1"));
+            venta[0] = String.valueOf(ven_tabla1.getValueAt(fila, 0));
+            venta[1] = String.valueOf(ven_tabla1.getValueAt(fila, 1));
+            venta[2] = String.valueOf(cantidad);
+            venta[3] = String.valueOf(Double.parseDouble((String) ven_tabla1.getValueAt(fila, 2)) * Integer.parseInt(cantidad));
+            ((DefaultTableModel) ven_tabla2.getModel()).addRow(venta);
+            Double acu = 0.0;
+            for (int i = 0; i < ven_tabla2.getRowCount(); i++) {
+                acu = acu + Double.parseDouble((String) ven_tabla2.getValueAt(i, 3));
             }
-            
+
             DecimalFormat f = new DecimalFormat("¤#.##");
             ven_total.setText(String.valueOf(f.format(acu)));
+        } else if (ven_tabla1.getSelectedRow() != 0) {
+            ven_btnSelectProduct.setEnabled(true);
         }
     }//GEN-LAST:event_ven_tabla1MouseClicked
 
@@ -4203,8 +4207,11 @@ public String name;
         String z="Guatemala,"+fechaday+" de "+fechames+" de "+fechayear;
         
         String mes="";
-        
-        String j=JOptionPane.showInputDialog("Ingrese la jornada");
+        //Obteniendo el parametro de jornada
+        Object[] jornada = {"Matutina","Vespertina","Sabatina"};
+        JComboBox combo = new JComboBox(jornada);
+        combo.setEditable(true);
+        String j=String.valueOf(JOptionPane.showInputDialog(null,"Ingrese la jornada","Jornada",JOptionPane.PLAIN_MESSAGE,null,jornada,"Matutina"));
         
         switch (num){
             case 1:
