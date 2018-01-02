@@ -149,7 +149,15 @@ public class imprimir {
         view.setExtendedState(0);
     }
     
-    public void mostrarHistorial(String title,String total,Object x){
-        
+    public void periodos(String x, String y) throws Exception {
+        Map parametros = new HashMap();
+        parametros.put("MIN", x);
+        parametros.put("MAX", y);
+        JasperReport reporte = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reportes/periodos.jrxml"));
+        JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexx);
+        JasperViewer view = new JasperViewer(print, false);
+        view.setVisible(true);
+        view.setTitle("Reporte Por Periodos");
+        view.setExtendedState(0);
     }
 }

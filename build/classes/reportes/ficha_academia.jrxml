@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-09-25T13:08:19 -->
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-08-28T17:03:18 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ficha_cjm" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1c3912b-cc32-479b-b244-371280071096">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -426,7 +426,7 @@
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los infrascritos aceptamos que son "+$F{ncuotas}+" cuotas, las que se deben pagar por el ciclo escolar de Enero a "+$P{mes}+" de 2017, las cuales deben pagarse en los primeros 10 dias de cada mes por adelantado para no generar mora. No se hacen reembolsos de inscripción ni mensualidades."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los infrascritos aceptamos que son "+$F{ncuotas}+" cuotas, las que se deben pagar por el ciclo escolar hasta el mes de "+$P{mes}+" del 2018, las cuales deben pagarse en los primeros 10 dias de cada mes por adelantado para no generar mora.Nota: No se hacen reembolsos de inscripción ni mensualidades."]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

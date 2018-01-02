@@ -2,8 +2,6 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="groupCuotas">
-    </Component>
     <Component class="javax.swing.ButtonGroup" name="groupOtrosCobros">
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
@@ -98,19 +96,6 @@
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator10">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/menuReport.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Notas De Cobro"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator11">
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -120,6 +105,19 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator11">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagenes/menuReport.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Periodos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -455,7 +453,7 @@
                                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="ins_tDireccion" alignment="0" min="-2" pref="440" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                                      <EmptySpace pref="75" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="ins_tTelefono" min="-2" pref="100" max="-2" attributes="0"/>
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -547,12 +545,11 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel66" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="ins_op10" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="ins_op11" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
                                                   <Component id="ins_tObsc" min="-2" pref="380" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                      <Component id="ins_spinerNoCuotas" min="-2" pref="45" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -687,8 +684,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ins_tInscripcion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ins_op10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ins_op11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ins_spinerNoCuotas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -700,7 +696,7 @@
                           <Component id="ins_tColegiatura" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ins_tObsc" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                      <EmptySpace pref="111" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ins_btnInscribir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ins_btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -923,22 +919,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="ins_tColegiatura">
             </Component>
-            <Component class="javax.swing.JRadioButton" name="ins_op10">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="99" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="10 Cuotas"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="ins_op11">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="99" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="11 Cuotas"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="ins_btnInscribir">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -983,6 +963,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="ins_tObsc">
+            </Component>
+            <Component class="javax.swing.JSpinner" name="ins_spinerNoCuotas">
             </Component>
           </SubComponents>
         </Container>
@@ -2274,15 +2256,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="pestanas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jButton3" min="-2" pref="150" max="-2" attributes="0"/>
                           <Component id="btnAlumnosCancelar" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2295,7 +2277,7 @@
                       <Component id="btnAlumnosCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <EmptySpace pref="78" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2363,7 +2345,7 @@
                                       <Component id="alumnosPROFmadre" min="-2" pref="179" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="13" max="32767" attributes="0"/>
+                              <EmptySpace pref="73" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>

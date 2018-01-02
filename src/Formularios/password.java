@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Formularios;
 
 import java.awt.event.KeyEvent;
 
-/**
- *
- * @author dager
- */
+
 public class password extends javax.swing.JDialog {
 
     public String contrasena;
     public boolean vf;
-    /**
-     * Creates new form password
-     */
+
     public password(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

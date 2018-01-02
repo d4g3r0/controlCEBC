@@ -49,10 +49,8 @@ public String name;
         this.setLocationRelativeTo(null);       
     }
     public void iniciarPanelIncripcion() {
-        //grupo de botones
-        groupCuotas.add(ins_op10);
-        groupCuotas.add(ins_op11);
-        ins_op10.setSelected(true);
+        //volores por defecto
+        ins_spinerNoCuotas.setValue(10);
         //limpiando casillas
         ins_tCodigo.setText("");
         ins_tNombres.setText("");
@@ -71,6 +69,7 @@ public String name;
         ins_tInscripcion.setText("");
         ins_tColegiatura.setText("");
         ins_tOtrosDocumentos.setText("");
+        ins_tObsc.setText("");
         //limpiando checkbox
         ins_checkRenap.setSelected(false);
         ins_checkMeca.setSelected(false);
@@ -92,7 +91,7 @@ public String name;
             registros[i] = "";
         }
     }
-    public void imprimirFichas(String servicio, String cuotas, String codigo) {
+    public void imprimirFichas(String servicio, String jornada, String codigo) {
         //impresion de ficha
         String x;
         String y = "";
@@ -106,10 +105,10 @@ public String name;
         } else {
             x = "ficha_academia.jrxml";
         }
-        if ("10".equals(cuotas)) {
-            y = "Octubre";
-        } else if ("11".equals(cuotas)) {
+        if ("Sabatina".equals(jornada)) {
             y = "Noviembre";
+        } else{
+            y = "Octubre";
         }
         imprimir abrir = new imprimir();
         try {
@@ -1144,7 +1143,6 @@ public String name;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        groupCuotas = new javax.swing.ButtonGroup();
         groupOtrosCobros = new javax.swing.ButtonGroup();
         panelDeBotones = new javax.swing.JPanel();
         btnInscripciones = new javax.swing.JButton();
@@ -1207,14 +1205,13 @@ public String name;
         jLabel19 = new javax.swing.JLabel();
         ins_tInscripcion = new javax.swing.JTextField();
         ins_tColegiatura = new javax.swing.JTextField();
-        ins_op10 = new javax.swing.JRadioButton();
-        ins_op11 = new javax.swing.JRadioButton();
         ins_btnInscribir = new javax.swing.JButton();
         ins_btnCancel = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         ins_btnImportar = new javax.swing.JButton();
         jLabel66 = new javax.swing.JLabel();
         ins_tObsc = new javax.swing.JTextField();
+        ins_spinerNoCuotas = new javax.swing.JSpinner();
         panelCobros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cob_tabla = new javax.swing.JTable();
@@ -1387,9 +1384,9 @@ public String name;
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jSeparator11 = new javax.swing.JPopupMenu.Separator();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Control de Ingresos");
@@ -1689,12 +1686,6 @@ public String name;
 
         jLabel19.setText("Colegiatura");
 
-        ins_op10.setForeground(new java.awt.Color(153, 0, 0));
-        ins_op10.setText("10 Cuotas");
-
-        ins_op11.setForeground(new java.awt.Color(153, 0, 0));
-        ins_op11.setText("11 Cuotas");
-
         ins_btnInscribir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ok.png"))); // NOI18N
         ins_btnInscribir.setText("Inscribir");
         ins_btnInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -1750,7 +1741,7 @@ public String name;
                                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(ins_tDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ins_tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
@@ -1822,11 +1813,10 @@ public String name;
                                         .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel66)
                                             .addComponent(jLabel20)
+                                            .addComponent(ins_tObsc, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(panelInscripcionesLayout.createSequentialGroup()
-                                                .addComponent(ins_op10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(ins_op11))
-                                            .addComponent(ins_tObsc, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(18, 18, 18)
+                                                .addComponent(ins_spinerNoCuotas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelInscripcionesLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
@@ -1932,8 +1922,7 @@ public String name;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ins_tInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ins_op10)
-                    .addComponent(ins_op11))
+                    .addComponent(ins_spinerNoCuotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
@@ -1942,7 +1931,7 @@ public String name;
                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ins_tColegiatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ins_tObsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ins_btnInscribir)
                     .addComponent(ins_btnCancel)
@@ -2834,7 +2823,7 @@ public String name;
                         .addComponent(jLabel61)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(alumnosPROFmadre, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, alumnosPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAlumnosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3157,13 +3146,13 @@ public String name;
             panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAlumnosLayout.createSequentialGroup()
                 .addComponent(pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAlumnosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlumnosCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71))
+                .addGap(60, 60, 60))
         );
         panelAlumnosLayout.setVerticalGroup(
             panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3174,7 +3163,7 @@ public String name;
                 .addComponent(btnAlumnosCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         panelContenedor.add(panelAlumnos, "card7");
@@ -3494,16 +3483,6 @@ public String name;
         jMenu2.add(jMenuItem5);
         jMenu2.add(jSeparator10);
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menuReport.png"))); // NOI18N
-        jMenuItem6.setText("Notas De Cobro");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem6);
-        jMenu2.add(jSeparator11);
-
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menuReport.png"))); // NOI18N
         jMenuItem7.setText("Notas De Cobro Por Jornada");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -3512,6 +3491,16 @@ public String name;
             }
         });
         jMenu2.add(jMenuItem7);
+        jMenu2.add(jSeparator11);
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menuReport.png"))); // NOI18N
+        jMenuItem6.setText("Periodos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
 
         jMenuBar1.add(jMenu2);
 
@@ -3995,7 +3984,7 @@ public String name;
     }//GEN-LAST:event_btnAlumnosEditar3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        imprimirFichas(String.valueOf(alumnosServicios.getSelectedItem()), alumnosNoCuotas.getText(),alumnosCodigo.getText());
+        imprimirFichas(String.valueOf(alumnosServicios.getSelectedItem()), String.valueOf(alumnosJornada.getSelectedItem()),alumnosCodigo.getText());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
@@ -4079,115 +4068,6 @@ public String name;
             DecimalFormat f = new DecimalFormat("¤#.##");
             ven_total.setText(String.valueOf(f.format(acu)));
     }//GEN-LAST:event_ven_btnSelectProductActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        imprimir nuevaNota = new imprimir();
-        //obteniendo el parametro num
-        Calendar x = Calendar.getInstance();
-        int num=x.get(Calendar.MONTH)+1;
-        //obenniendo el parametro fecha
-        Format formatoMont = new SimpleDateFormat("MMMMM");
-        String fechames = formatoMont.format(new Date());
-        
-        Format formatoDay = new SimpleDateFormat("d");
-        String fechaday = formatoDay.format(new Date());
-        
-        Format formatoYear = new SimpleDateFormat("yyyy");
-        String fechayear = formatoYear.format(new Date());
-        
-        String z="Guatemala,"+fechaday+" de "+fechames+" de "+fechayear;
-        
-        String mes="";
-        switch (num){
-            case 1:
-                mes="jan";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes, z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 2:
-                mes="feb";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 3:
-                mes="mar";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 4:
-                mes="apr";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 5:
-                mes="may";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 6:
-                mes="jun";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 7:
-                mes="jul";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 8:
-                mes="ago";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 9:
-                mes="sep";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 10:
-                mes="oct";
-                try {
-                    nuevaNota.notasCobro(String.valueOf(num), mes,z);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            case 11:
-                JOptionPane.showMessageDialog(null, "Durante el mes de noviembre no se generan notas de cobro");
-                break;
-            case 12:
-                JOptionPane.showMessageDialog(null, "Durante el mes de diciembre no se generan notas de cobro");
-                break;        
-        }//fin del case
-       
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         imprimir nuevaNota = new imprimir();
@@ -4527,24 +4407,16 @@ public String name;
     }//GEN-LAST:event_ins_btnCancelActionPerformed
 
     private void ins_btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ins_btnInscribirActionPerformed
-        //inscripciones 2017
+        //inscripciones 2018
         //obtener fecha
         Date hoy = new Date();
         SimpleDateFormat fechaSimple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String codduplex = "";
-        String ncuotas;
-        //obtener numero de cuotas a pagar
-        if(ins_op10.isSelected()){
-            ncuotas="10";
-        }else{
-            ncuotas="11";
-        }
-
         try {
             conexion objConexion = new conexion();
             Connection cn = objConexion.conectar();
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2017 WHERE cod='" + ins_tCodigo.getText() + "'");
+            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2018 WHERE cod='" + ins_tCodigo.getText() + "'");
             while (rs.next()) {
                 codduplex = rs.getString("cod");
             }
@@ -4560,7 +4432,7 @@ public String name;
             try {
                 conexion objConexion = new conexion();
                 Connection cn = objConexion.conectar();
-                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2017 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2018 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 st.setString(1, ins_tCodigo.getText());
                 st.setString(2, ins_tNombres.getText());
                 st.setString(3, ins_tApellidos.getText());
@@ -4580,18 +4452,18 @@ public String name;
                 st.setString(17, String.valueOf(ins_servicio.getSelectedItem()));
                 st.setString(18, ins_tInscripcion.getText());
                 st.setString(19, ins_tColegiatura.getText());
-                st.setString(20, ncuotas);
+                st.setString(20, String.valueOf(ins_spinerNoCuotas.getValue()));
                 st.setString(21, updatesql + ins_tOtrosDocumentos.getText());
                 st.setString(22, fechaSimple.format(hoy));
                 st.setString(23, ins_tObsc.getText());
                 st.setString(24, "Inscrito");
                 st.execute();
                 //ingresamos el codigo al libro de cuotas
-                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2017 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
+                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2018 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
                 st0.execute();
                 JOptionPane.showMessageDialog(null, "Inscripcion realizada EXITOSAMENTE!");
                 //impresion de ficha
-                imprimirFichas(String.valueOf(ins_servicio.getSelectedItem()), ncuotas, ins_tCodigo.getText());
+                imprimirFichas(String.valueOf(ins_servicio.getSelectedItem()), String.valueOf(ins_cJornada.getSelectedItem()), ins_tCodigo.getText());
                 objConexion.cerrarConexion();
                 //limpiamos el panel de inscripcion
                 iniciarPanelIncripcion();
@@ -4636,6 +4508,11 @@ public String name;
     private void ins_servicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ins_servicioItemStateChanged
         insComboboxes(String.valueOf(ins_servicio.getSelectedItem()));
     }//GEN-LAST:event_ins_servicioItemStateChanged
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        formPeriodos nuevo = new formPeriodos();
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4748,7 +4625,6 @@ public String name;
     private javax.swing.JTextField fGastos_nombre;
     private javax.swing.JTextField fGastos_observacion;
     private javax.swing.JTextField fGastos_registro;
-    private javax.swing.ButtonGroup groupCuotas;
     private javax.swing.ButtonGroup groupOtrosCobros;
     private javax.swing.JTextField historialBuscar;
     private javax.swing.JTable historialTable1;
@@ -4765,9 +4641,8 @@ public String name;
     private javax.swing.JCheckBox ins_checkDTercero;
     private javax.swing.JCheckBox ins_checkMeca;
     private javax.swing.JCheckBox ins_checkRenap;
-    private javax.swing.JRadioButton ins_op10;
-    private javax.swing.JRadioButton ins_op11;
     private javax.swing.JComboBox ins_servicio;
+    private javax.swing.JSpinner ins_spinerNoCuotas;
     private javax.swing.JTextField ins_tApellidos;
     private javax.swing.JTextField ins_tCodigo;
     private javax.swing.JTextField ins_tColegiatura;
