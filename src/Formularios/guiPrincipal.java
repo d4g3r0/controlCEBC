@@ -1150,7 +1150,6 @@ public String name;
         btnVentas = new javax.swing.JButton();
         btnGastos = new javax.swing.JButton();
         btnAlumnos = new javax.swing.JButton();
-        btnCarnet = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         btnOtrosCobros = new javax.swing.JButton();
         panelContenedor = new javax.swing.JPanel();
@@ -1481,30 +1480,16 @@ public String name;
             }
         });
 
-        btnCarnet.setFont(new java.awt.Font("Droid Sans", 1, 18)); // NOI18N
-        btnCarnet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carnet.png"))); // NOI18N
-        btnCarnet.setText("Carnet");
-        btnCarnet.setEnabled(false);
-        btnCarnet.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCarnet.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCarnetMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCarnetMouseEntered(evt);
-            }
-        });
-
         btnHistorial.setFont(new java.awt.Font("Droid Sans", 1, 18)); // NOI18N
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hisotiral2.png"))); // NOI18N
         btnHistorial.setText("Historial");
         btnHistorial.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnHistorialMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnHistorialMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnHistorialMouseEntered(evt);
             }
         });
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
@@ -1543,13 +1528,12 @@ public String name;
                     .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCarnet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOtrosCobros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelDeBotonesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlumnos, btnCarnet, btnColegiaturas, btnGastos, btnHistorial, btnInscripciones, btnVentas});
+        panelDeBotonesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAlumnos, btnColegiaturas, btnGastos, btnHistorial, btnInscripciones, btnVentas});
 
         panelDeBotonesLayout.setVerticalGroup(
             panelDeBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1564,8 +1548,6 @@ public String name;
                 .addComponent(btnGastos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAlumnos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCarnet)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHistorial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2308,7 +2290,7 @@ public String name;
                             .addComponent(cob_check_marzo)
                             .addComponent(cob_check_julio)
                             .addComponent(cob_check_noviembre)))
-                    .addComponent(iconState, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(iconState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3569,14 +3551,6 @@ public String name;
         Marquesina.setText("<html><CENTER>Bienvenido!...Aquí vera alguna información Importante</CENTER></html>");
     }//GEN-LAST:event_btnAlumnosMouseExited
 
-    private void btnCarnetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCarnetMouseEntered
-        Marquesina.setText("<html><CENTER>Impresión de Carnet de Estudiante</CENTER></html>");
-    }//GEN-LAST:event_btnCarnetMouseEntered
-
-    private void btnCarnetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCarnetMouseExited
-        Marquesina.setText("<html><CENTER>Bienvenido!...Aquí vera alguna información Importante</CENTER></html>");
-    }//GEN-LAST:event_btnCarnetMouseExited
-
     private void btnHistorialMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseEntered
         Marquesina.setText("<html><CENTER>Busqueda en registro de ingresos.</CENTER></html>");
     }//GEN-LAST:event_btnHistorialMouseEntered
@@ -4237,6 +4211,8 @@ public String name;
             //obtener fecha
             Date hoy = new Date();
             SimpleDateFormat fechaSimple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //obtener numero de recibo
+            int norecibox=autoNumerarRecibos(cob_servicio.getText());
             //escribir los cambios en cuotas
             String sql = "UPDATE cuotas_" + yearRecibo + " SET " + updatesql + " " + "obs=NULL" + " WHERE cod=" + "'" + cob_codigo.getText() + "'";
             try {
@@ -4244,7 +4220,7 @@ public String name;
                 Connection cn = objConexion.conectar();
                 //ingreso a registro
                 PreparedStatement st0 = cn.prepareStatement("INSERT INTO registro (norecibo,nom,concepto,date,ingreso,serv,obs) VALUES (?,?,?,?,?,?,?)");
-                st0.setString(1, cob_recibo.getText());
+                st0.setString(1, String.valueOf(norecibox));
                 st0.setString(2, cob_nombres.getText() + " " + cob_apellidos.getText());
                 st0.setString(3, cob_concepto.getText());
                 st0.setString(4, fechaSimple.format(hoy));
@@ -4579,7 +4555,6 @@ public String name;
     private javax.swing.JButton btnAlumnosEditar;
     private javax.swing.JButton btnAlumnosEditar2;
     private javax.swing.JButton btnAlumnosEditar3;
-    private javax.swing.JButton btnCarnet;
     private javax.swing.JButton btnColegiaturas;
     private javax.swing.JButton btnGastos;
     private javax.swing.JButton btnHistorial;
