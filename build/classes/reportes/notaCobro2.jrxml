@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-04-27T18:00:02 -->
+<!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaCobro" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af1ffa1c-4aa4-4fa6-b49a-aaff512092e0">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
@@ -12,23 +11,23 @@
 	<parameter name="jornada" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-inscripciones_2017.nom,
-inscripciones_2017.ape,
-inscripciones_2017.grado,
-((IFNULL(inscripciones_2017.ins,0)+(IFNULL(inscripciones_2017.mens,0)* $P{num} ))-(IFNULL(cuotas_2017.ins,0)+IFNULL(cuotas_2017.jan,0)+IFNULL(cuotas_2017.feb,0)+IFNULL(cuotas_2017.mar,0)+IFNULL(cuotas_2017.apr,0)+IFNULL(cuotas_2017.may,0)+IFNULL(cuotas_2017.jun,0)+IFNULL(cuotas_2017.jul,0)+IFNULL(cuotas_2017.ago,0)+IFNULL(cuotas_2017.sep,0)+IFNULL(cuotas_2017.oct,0)+IFNULL(cuotas_2017.nov,0)))AS TOTAL
+inscripciones_2018.nom,
+inscripciones_2018.ape,
+inscripciones_2018.grado,
+((IFNULL(inscripciones_2018.ins,0)+(IFNULL(inscripciones_2018.mens,0)* $P{num} ))-(IFNULL(cuotas_2018.ins,0)+IFNULL(cuotas_2018.jan,0)+IFNULL(cuotas_2018.feb,0)+IFNULL(cuotas_2018.mar,0)+IFNULL(cuotas_2018.apr,0)+IFNULL(cuotas_2018.may,0)+IFNULL(cuotas_2018.jun,0)+IFNULL(cuotas_2018.jul,0)+IFNULL(cuotas_2018.ago,0)+IFNULL(cuotas_2018.sep,0)+IFNULL(cuotas_2018.oct,0)+IFNULL(cuotas_2018.nov,0)))AS TOTAL
 FROM
-inscripciones_2017
+inscripciones_2018
 INNER JOIN
-cuotas_2017
+cuotas_2018
 ON
-inscripciones_2017.cod=cuotas_2017.cod
+inscripciones_2018.cod=cuotas_2018.cod
 WHERE
-cuotas_2017. $P!{mes}  IS NULL 
+cuotas_2018. $P!{mes}  IS NULL 
 AND
-inscripciones_2017.jornada= $P{jornada}
+inscripciones_2018.jornada= $P{jornada}
 AND
-inscripciones_2017.estado='inscrito' 
-ORDER BY inscripciones_2017.grado]]>
+inscripciones_2018.estado='inscrito' 
+ORDER BY inscripciones_2018.grado]]>
 	</queryString>
 	<field name="nom" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -50,7 +49,7 @@ ORDER BY inscripciones_2017.grado]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Señor padre de familia por este medio le saludamos esperando que nuestro señor Jesucristo le bendiga grandemente en todas sus labores, el motivo de la presente es para informarle que el alumno (a):"+$F{nom}+" "+$F{ape}+" de "+$F{grado}+", se encuentra actualmente atrasado en sus colegiaturas por un monto de Q."+$F{TOTAL}+", razón por la cual le pedimos que solvente esta situación lo antes posible. Puede acercarse a la oficina del colegio en horario de 7:00 de la mañana hasta 5:30 de la tarde, será un gusto atenderle."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Señor padre de familia por este medio le saludamos esperando que nuestro señor Jesucristo le bendiga grandemente en todas sus labores, el motivo de la presente es para informarle que el alumno (a):"+$F{nom}+" "+$F{ape}+" de "+$F{grado}+", se encuentra actualmente atrasado en sus colegiaturas por un monto de Q."+$F{TOTAL}+", correspondiente al presente ciclo escolar razón por la cual le pedimos que solvente esta situación lo antes posible. Puede acercarse a la oficina del colegio en horario de 7:30 de la mañana hasta 5:00 de la tarde, será un gusto atenderle."]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="0" y="0" width="210" height="30" uuid="d4f61976-66b3-477c-940c-36d91a3a0919"/>

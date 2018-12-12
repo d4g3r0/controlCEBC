@@ -2,6 +2,7 @@ package Formularios;
 
 import Clases.conexion;
 import Clases.imprimir;
+import com.toedter.calendar.JCalendar;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -96,9 +97,7 @@ public String name;
         String x;
         String y = "";
 
-        if ("Colegio Juan Marcos".equals(servicio)) {
-            x = "ficha_cjm.jrxml";
-        } else if ("Colegio Cristiano Josue".equals(servicio)) {
+        if ("Colegio Cristiano Josue".equals(servicio)) {
             x = "ficha_josue.jrxml";
         } else if ("Colegio El Buen Camino".equals(servicio)) {
             x = "ficha_cebc.jrxml";
@@ -261,6 +260,7 @@ public String name;
         //limpiando info y registros
         ven_info.setText("");
         ven_total.setText("MONTO");
+        ven_searchbox.setText("");
         for (int i = 0; i < registros.length; i++) {
             registros[i] = "";
         }
@@ -317,6 +317,11 @@ public String name;
         name = registros[2] + " " + registros[1];
         ven_searchbox.requestFocus();
         ven_btnSelectProduct.setEnabled(false);
+    }
+    public void buscarTabVentas(String query){
+        TableRowSorter tablaOrdenada = new TableRowSorter((DefaultTableModel)ven_tabla1.getModel());
+        ven_tabla1.setRowSorter(tablaOrdenada);
+        tablaOrdenada.setRowFilter(RowFilter.regexFilter("(?i)" + query, new int[0]));
     }
     public int autoNumerarRecibos(String servicio){
         String x = null;
@@ -1138,6 +1143,22 @@ public String name;
         }
         
     }
+    public void limpiarVentas(){
+        try {
+            DefaultTableModel model1 = (DefaultTableModel) this.ven_tabla1.getModel();
+            DefaultTableModel model2 = (DefaultTableModel) this.ven_tabla2.getModel();
+            int filas1 = this.ven_tabla1.getRowCount();
+            int filas2 = this.ven_tabla2.getRowCount();
+            for (int i = 0; filas1 > i; i++) {
+                model1.removeRow(0);
+            }
+            for (int i = 0; filas2 > i; i++) {
+                model2.removeRow(0);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al limpiar tabla:" + e);
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1260,6 +1281,7 @@ public String name;
         jPanel4 = new javax.swing.JPanel();
         alerta_bonbillo = new javax.swing.JLabel();
         iconState = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         panelVentas = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -1566,17 +1588,17 @@ public String name;
         PanelInfo.setLayout(PanelInfoLayout);
         PanelInfoLayout.setHorizontalGroup(
             PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInfoLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(PanelInfoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(Marquesina, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         PanelInfoLayout.setVerticalGroup(
             PanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInfoLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(131, 131, 131)
                 .addComponent(Marquesina, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         panelContenedor.add(PanelInfo, "card2");
@@ -1723,7 +1745,7 @@ public String name;
                                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(ins_tDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                                 .addGroup(panelInscripcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ins_tTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
@@ -2112,7 +2134,7 @@ public String name;
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(alerta_bonbillo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(alerta_bonbillo, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -2125,109 +2147,118 @@ public String name;
 
         iconState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jButton4.setText("ESTADO");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCobrosLayout = new javax.swing.GroupLayout(panelCobros);
         panelCobros.setLayout(panelCobrosLayout);
         panelCobrosLayout.setHorizontalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCobrosLayout.createSequentialGroup()
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCobrosLayout.createSequentialGroup()
+                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cob_check_marzo)
+                            .addComponent(cob_check_febrero)
                             .addGroup(panelCobrosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_check_ins)
+                                    .addComponent(cob_check_enero))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_check_abril)
                                     .addGroup(panelCobrosLayout.createSequentialGroup()
                                         .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cob_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel21))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cob_check_mayo)
+                                            .addComponent(cob_check_junio)
+                                            .addComponent(cob_check_julio))
+                                        .addGap(18, 18, 18)
                                         .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cob_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel22))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cob_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel23))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel24)
-                                            .addComponent(cob_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cob_check_septiembre)
+                                            .addComponent(cob_check_octubre)
+                                            .addComponent(cob_check_agosto)
+                                            .addComponent(cob_check_noviembre))))
+                                .addGap(8, 8, 8)
+                                .addComponent(cob_check_clausura)))
+                        .addGap(18, 18, 18)
+                        .addComponent(iconState, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(70, Short.MAX_VALUE))
+                    .addGroup(panelCobrosLayout.createSequentialGroup()
+                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cob_btnOtronombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cob_btnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cob_btnAceptar))
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(panelCobrosLayout.createSequentialGroup()
-                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cob_check_marzo)
-                                            .addComponent(cob_check_febrero)
-                                            .addGroup(panelCobrosLayout.createSequentialGroup()
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cob_check_ins)
-                                                    .addComponent(cob_check_enero))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cob_check_abril)
-                                                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(cob_check_mayo)
-                                                            .addComponent(cob_check_junio)
-                                                            .addComponent(cob_check_julio))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(cob_check_septiembre)
-                                                            .addComponent(cob_check_octubre)
-                                                            .addComponent(cob_check_agosto)
-                                                            .addComponent(cob_check_noviembre))))
-                                                .addGap(8, 8, 8)
-                                                .addComponent(cob_check_clausura)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(iconState, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(panelCobrosLayout.createSequentialGroup()
-                                                .addComponent(cob_btnOtronombre)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cob_btnCancelar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cob_btnAceptar))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCobrosLayout.createSequentialGroup()
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cob_grado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel25))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cob_jornada, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel26))
-                                                .addGap(202, 202, 202)
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel27)
-                                                    .addComponent(cob_inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCobrosLayout.createSequentialGroup()
-                                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                                                        .addComponent(jLabel31)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(cob_observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                                                        .addGap(10, 10, 10)
-                                                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(panelCobrosLayout.createSequentialGroup()
-                                                                .addComponent(jLabel29)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(cob_recibo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(172, 172, 172)
-                                                                .addComponent(jLabel30)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(cob_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                            .addComponent(jLabel32)
-                                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGap(12, 12, 12))
-                                    .addComponent(cob_colegiatura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel31)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cob_observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(panelCobrosLayout.createSequentialGroup()
+                                            .addComponent(jLabel29)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cob_recibo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel30)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cob_monto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel32)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(70, 70, 70))))
+            .addGroup(panelCobrosLayout.createSequentialGroup()
+                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCobrosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_grado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel25))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_jornada, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel26))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27)
+                                    .addComponent(cob_inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_colegiatura, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel28)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel21))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel22))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cob_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel23))
+                                .addGap(55, 55, 55)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel24)
+                                    .addComponent(cob_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         panelCobrosLayout.setVerticalGroup(
@@ -2246,25 +2277,27 @@ public String name;
                     .addComponent(cob_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cob_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel26))
+                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel26))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cob_grado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cob_jornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelCobrosLayout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cob_inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cob_grado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cob_jornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel28))
+                        .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cob_inscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cob_colegiatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cob_colegiatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2310,11 +2343,12 @@ public String name;
                             .addComponent(jLabel31)
                             .addComponent(cob_observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cob_btnAceptar)
                     .addComponent(cob_btnCancelar)
-                    .addComponent(cob_btnOtronombre))
+                    .addComponent(cob_btnOtronombre)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -2669,7 +2703,7 @@ public String name;
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btn_GastosAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(panelInteriorGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         panelGastosLayout.setVerticalGroup(
             panelGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3128,7 +3162,7 @@ public String name;
             panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAlumnosLayout.createSequentialGroup()
                 .addComponent(pestanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAlumnosLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(panelAlumnosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -3154,7 +3188,7 @@ public String name;
         panelCarnet.setLayout(panelCarnetLayout);
         panelCarnetLayout.setHorizontalGroup(
             panelCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 741, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
         );
         panelCarnetLayout.setVerticalGroup(
             panelCarnetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3239,7 +3273,7 @@ public String name;
                         .addComponent(btnHistorialBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnHistorialImprimir)
-                        .addGap(200, 224, Short.MAX_VALUE))))
+                        .addGap(200, 300, Short.MAX_VALUE))))
         );
         panelHistorialLayout.setVerticalGroup(
             panelHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3356,7 +3390,7 @@ public String name;
                         .addGroup(panelOtrosCobrosLayout.createSequentialGroup()
                             .addGap(111, 111, 111)
                             .addComponent(detallesRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         panelOtrosCobrosLayout.setVerticalGroup(
             panelOtrosCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3393,7 +3427,7 @@ public String name;
             .addGroup(panelOcultoLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         panelOcultoLayout.setVerticalGroup(
             panelOcultoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3456,7 +3490,7 @@ public String name;
         jMenu2.add(jSeparator9);
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menuReport.png"))); // NOI18N
-        jMenuItem5.setText("Morosos");
+        jMenuItem5.setText("Libro de cuotas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -3476,7 +3510,7 @@ public String name;
         jMenu2.add(jSeparator11);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menuReport.png"))); // NOI18N
-        jMenuItem6.setText("Periodos");
+        jMenuItem6.setText("Reporte Por Periodos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -3641,13 +3675,19 @@ public String name;
 
             DecimalFormat f = new DecimalFormat("¤#.##");
             ven_total.setText(String.valueOf(f.format(acu)));
+            //limpiar la tabla antes de salir
+            ven_searchbox.setText("");
+            buscarTabVentas(ven_searchbox.getText());
+            ven_searchbox.requestFocus();
         } else if (ven_tabla1.getSelectedRow() != 0) {
             ven_btnSelectProduct.setEnabled(true);
         }
     }//GEN-LAST:event_ven_tabla1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        escogerpanel("x");
+        escogerpanel("0");
+        ven_searchbox.setText("");
+        buscarTabVentas(ven_searchbox.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ven_tabla2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ven_tabla2MouseClicked
@@ -3693,60 +3733,86 @@ public String name;
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String concepto = "";
-        int noFila = ven_tabla2.getRowCount();
-        for (int i=0; i<noFila; i++) {
-            concepto=concepto+ String.valueOf(ven_tabla2.getValueAt(i,2))+" "+String.valueOf(ven_tabla2.getValueAt(i, 1))+";";
-        }
-        Date fecha = new Date();
-        String formato = "yyyy-MM-dd HH:mm:ss";
-        DateFormat formato_fecha = new SimpleDateFormat(formato);
-        Double total = 0.0;
-        Double saldo;
-        for(int i=0;i<ven_tabla2.getRowCount();i++){
-                total=total+Double.parseDouble((String)ven_tabla2.getValueAt(i, 3));
-            }
-        Double abono= Double.valueOf(JOptionPane.showInputDialog("Ingrese Monto"));
-        if(total == abono){
-            saldo=0.0;
-        }else{
-            saldo= total-abono;
-        }       
-        String estado = JOptionPane.showInputDialog("Agregar alguna anotación");        
-        //nueva autonumeracion
-        int norecibo=autoNumerarRecibos("Otro");
         try {
-            conexion nc = new conexion();
-            Connection n = nc.conectar();
-            //ingresa movimiento a libro de ventas 
-            PreparedStatement st = n.prepareStatement("INSERT INTO ventas_" + year + " (cod,concepto,monto,saldo,fecha,estado)VALUES (?,?,?,?,?,?)");
-            st.setString(1, registros[0]);
-            st.setString(2, concepto);
-            st.setString(3, String.valueOf(total));
-            st.setString(4, String.valueOf(saldo));
-            st.setString(5, formato_fecha.format(fecha));
-            st.setString(6, estado);
-            st.execute();
+            //declaracion de variables y valores a utilizar.
+            String concepto = "";
+            Date fecha = new Date();
+            String formato = "yyyy-MM-dd HH:mm:ss";
+            DateFormat formato_fecha = new SimpleDateFormat(formato);
+            Double total = 0.0;
+            Double saldo;
+            Double abono = 0.0;
+            //llenar la variable concepto.
+            int noFila = ven_tabla2.getRowCount();
+            for (int i = 0; i < noFila; i++) {
+                concepto = concepto + String.valueOf(ven_tabla2.getValueAt(i, 2)) + " " + String.valueOf(ven_tabla2.getValueAt(i, 1)) + ";";
+            }
+            //comprobar que la variable concepto no esta vacia.
+            if (concepto.equals("") || concepto.equals(" ")) {
+                JOptionPane.showMessageDialog(null, "No hay ningun articulo en la lista de compras, CANCELANDO... Vuelva a intentarlo.");
+                //volviendo al panel principal
+                escogerpanel("x");
+            } else {
+                for (int i = 0; i < ven_tabla2.getRowCount(); i++) {
+                    total = total + Double.parseDouble((String) ven_tabla2.getValueAt(i, 3));
+                }
+                /**
+                 * A continuación se le pide al usuario que ingrese la cantidad
+                 * de dinero que el comprador deja y se comprueba si es el total
+                 * de la compra o si se trata de un abono a la misma.
+                 */
 
-            //ingresa movimiento a registros
-            PreparedStatement st1 = n.prepareStatement("INSERT INTO registro (norecibo,nom,concepto,date,ingreso,serv,obs) VALUES (?,?,?,?,?,?,?)");
-            st1.setString(1, String.valueOf(norecibo));
-            st1.setString(2, registros[2] + " " + registros[1]);
-            st1.setString(3, concepto + " Saldo:" + String.valueOf(saldo));
-            st1.setString(4, formato_fecha.format(fecha));
-            st1.setString(5, String.valueOf(abono));
-            st1.setString(6, "Otro");
-            st1.setString(7, "");
-            st1.execute();
+                abono = Double.valueOf(JOptionPane.showInputDialog("INGRESE EL MONTO"));
 
-            //imprimir recibo
-            printRecibo(String.valueOf(norecibo), "Otro");
-            nc.cerrarConexion();
-            escogerpanel("0");
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
+                //Comprobar si el monto esta vacio
+                if (abono.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un monto");
+                    abono = Double.valueOf(JOptionPane.showInputDialog("INGRESE EL MONTO"));
+                } else {
+                    //Calculo de Saldo (si lo hay)
+                    if (total == abono) {
+                        saldo = 0.0;
+                    } else {
+                        saldo = total - abono;
+                    }//fin de la comprobación del saldo
+                    String estado = JOptionPane.showInputDialog("Agregar alguna anotación");
+                    //Registrar Operación, nueva autonumeracion
+                    int norecibo = autoNumerarRecibos("Otro");
+                    conexion nc = new conexion();
+                    Connection n = nc.conectar();
+                    //ingresa movimiento a libro de ventas 
+                    PreparedStatement st = n.prepareStatement("INSERT INTO ventas_" + year + " (cod,concepto,monto,saldo,fecha,estado)VALUES (?,?,?,?,?,?)");
+                    st.setString(1, registros[0]);
+                    st.setString(2, concepto);
+                    st.setString(3, String.valueOf(total));
+                    st.setString(4, String.valueOf(saldo));
+                    st.setString(5, formato_fecha.format(fecha));
+                    st.setString(6, estado);
+                    st.execute();
+                    //ingresa movimiento a registros
+                    PreparedStatement st1 = n.prepareStatement("INSERT INTO registro (norecibo,nom,concepto,date,ingreso,serv,obs) VALUES (?,?,?,?,?,?,?)");
+                    st1.setString(1, String.valueOf(norecibo));
+                    st1.setString(2, registros[2] + " " + registros[1]);
+                    st1.setString(3, concepto + " Saldo:" + String.valueOf(saldo));
+                    st1.setString(4, formato_fecha.format(fecha));
+                    st1.setString(5, String.valueOf(abono));
+                    st1.setString(6, "Otro");
+                    st1.setString(7, "");
+                    st1.execute();
+                    //registrar el movimiento en el inventario
+                    for (int i = 0; i < ven_tabla2.getRowCount(); i++) {
+                        PreparedStatement stupdate = n.prepareStatement("UPDATE inventario set stock = stock-"+(ven_tabla2.getValueAt(i, 2))+" WHERE codigo="+ven_tabla2.getValueAt(i, 0));
+                        stupdate.executeUpdate();
+                    }
+                    //imprimir recibo
+                    printRecibo(String.valueOf(norecibo), "Otro");
+                    nc.cerrarConexion();
+                    escogerpanel("0");
+                }//fin de la comprobación del saldo 
+            }//fin de la comprobación del concepto
+        } catch (HeadlessException | ClassNotFoundException | NumberFormatException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error:"+e);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_historialVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_historialVentasActionPerformed
@@ -4021,9 +4087,7 @@ public String name;
     }//GEN-LAST:event_btnHistorialImprimirActionPerformed
 
     private void ven_searchboxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ven_searchboxKeyTyped
-        TableRowSorter tablaOrdenada = new TableRowSorter((DefaultTableModel)ven_tabla1.getModel());
-        ven_tabla1.setRowSorter(tablaOrdenada);
-        tablaOrdenada.setRowFilter(RowFilter.regexFilter("(?i)" + ven_searchbox.getText(), new int[0]));
+        buscarTabVentas(ven_searchbox.getText());
     }//GEN-LAST:event_ven_searchboxKeyTyped
 
     private void ven_btnSelectProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ven_btnSelectProductActionPerformed
@@ -4383,7 +4447,7 @@ public String name;
     }//GEN-LAST:event_ins_btnCancelActionPerformed
 
     private void ins_btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ins_btnInscribirActionPerformed
-        //inscripciones 2018
+        //inscripciones 2019
         //obtener fecha
         Date hoy = new Date();
         SimpleDateFormat fechaSimple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -4392,7 +4456,7 @@ public String name;
             conexion objConexion = new conexion();
             Connection cn = objConexion.conectar();
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2018 WHERE cod='" + ins_tCodigo.getText() + "'");
+            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2019 WHERE cod='" + ins_tCodigo.getText() + "'");
             while (rs.next()) {
                 codduplex = rs.getString("cod");
             }
@@ -4408,7 +4472,7 @@ public String name;
             try {
                 conexion objConexion = new conexion();
                 Connection cn = objConexion.conectar();
-                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2018 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2019 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 st.setString(1, ins_tCodigo.getText());
                 st.setString(2, ins_tNombres.getText());
                 st.setString(3, ins_tApellidos.getText());
@@ -4435,7 +4499,7 @@ public String name;
                 st.setString(24, "Inscrito");
                 st.execute();
                 //ingresamos el codigo al libro de cuotas
-                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2018 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
+                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2019 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
                 st0.execute();
                 JOptionPane.showMessageDialog(null, "Inscripcion realizada EXITOSAMENTE!");
                 //impresion de ficha
@@ -4485,9 +4549,52 @@ public String name;
         insComboboxes(String.valueOf(ins_servicio.getSelectedItem()));
     }//GEN-LAST:event_ins_servicioItemStateChanged
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        formPeriodos nuevo = new formPeriodos();
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        estadoCuenta nuevo = new estadoCuenta(yearRecibo, cob_codigo.getText());
         nuevo.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        //variables 
+        String fecha1,fecha2;
+        fecha1="";
+        fecha2="";
+        try {
+            String mensaje = "ingrese fecha de inicio:\n";
+            JCalendar calendario = new  JCalendar();
+            Object[] params = {mensaje, calendario};
+            JOptionPane.showConfirmDialog(null, params, "fecha de inicio", JOptionPane.PLAIN_MESSAGE);
+            //obtener respuesta 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            fecha1 = sdf.format(((JCalendar) params[1]).getDate());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cancelado");
+            System.exit(1);
+        }
+        
+        try {
+            String mensaje2 = "ingrese fecha final:\n";
+            JCalendar calendario2 = new JCalendar();
+            Object[] params2 = {mensaje2, calendario2};
+            JOptionPane.showConfirmDialog(null, params2, "fecha final", JOptionPane.PLAIN_MESSAGE);
+            //obtener respuesta 
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+            fecha2 = sdf2.format(((JCalendar) params2[1]).getDate());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cancelado");
+            System.exit(1);
+        }
+        //imprimiendo el reporte
+        try {
+            String query;
+            query="SELECT * FROM registro WHERE date BETWEEN  '"+fecha1+"'  AND  '"+fecha2+"' ";
+            imprimir nuevoReporte = new imprimir();
+            nuevoReporte.mostarPeriodos(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
@@ -4639,6 +4746,7 @@ public String name;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

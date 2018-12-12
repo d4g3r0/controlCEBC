@@ -84,7 +84,7 @@ public class buscar extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        bus_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Click Aquí", "2015", "2016", "2017", "2018" }));
+        bus_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Click Aquí", "2015", "2016", "2017", "2018", "2019" }));
         bus_year.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 bus_yearItemStateChanged(evt);

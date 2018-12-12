@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-09-14T10:17:51 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inglesos" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e390194-8931-484c-b42e-7d8af502b51b">
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="periodos" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e390194-8931-484c-b42e-7d8af502b51b">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="cebc"/>
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<parameter name="MIN" class="java.lang.String">
-		<parameterDescription><![CDATA[]]></parameterDescription>
-	</parameter>
-	<parameter name="MAX" class="java.lang.String"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
 	<queryString>
-		<![CDATA[SELECT * FROM registro WHERE DATE(date) BETWEEN  $P{MIN}   AND  $P{MAX} ]]>
+		<![CDATA[SELECT * FROM registro WHERE date BETWEEN '2018-01-01'  AND  ' 2018-01-30']]>
 	</queryString>
 	<field name="no" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>

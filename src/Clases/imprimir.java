@@ -11,6 +11,9 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 public class imprimir {
 
@@ -109,16 +112,31 @@ public class imprimir {
         view.setExtendedState(0);
     }
     
-    public void mostarMorosos(String x, int y, String z) throws Exception {
-        Map parametros = new HashMap();
-        parametros.put("mes", x);
-        parametros.put("ano", Integer.valueOf(y));
-        parametros.put("grado", z);
-        JasperReport reporte = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reportes/MOROSOS2.jrxml"));
-        JasperPrint print = JasperFillManager.fillReport(reporte, parametros, conexx);
+    public void mostarMorosos(String sql) throws Exception {
+        System.out.println(sql);
+        JasperDesign jd= JRXmlLoader.load(getClass().getResourceAsStream("/reportes/MOROSOS.jrxml"));
+        JRDesignQuery newQuery = new JRDesignQuery();
+        newQuery.setText(sql);
+        jd.setQuery(newQuery);
+        JasperReport jr = JasperCompileManager.compileReport(jd);
+        JasperPrint print = JasperFillManager.fillReport(jr, null, conexx);
         JasperViewer view = new JasperViewer(print, false);
         view.setVisible(true);
-        view.setTitle("Listado de Morosos");
+        view.setTitle("LIBRO DE CUOTAS");
+        view.setExtendedState(0);
+    }
+    
+    public void mostarPeriodos(String sql) throws Exception {
+        System.out.println(sql);
+        JasperDesign jd= JRXmlLoader.load(getClass().getResourceAsStream("/reportes/periodos.jrxml"));
+        JRDesignQuery newQuery = new JRDesignQuery();
+        newQuery.setText(sql);
+        jd.setQuery(newQuery);
+        JasperReport jr = JasperCompileManager.compileReport(jd);
+        JasperPrint print = JasperFillManager.fillReport(jr, null, conexx);
+        JasperViewer view = new JasperViewer(print, false);
+        view.setVisible(true);
+        view.setTitle("Reporte Por Periodos");
         view.setExtendedState(0);
     }
     

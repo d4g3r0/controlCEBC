@@ -2,6 +2,7 @@
 package Formularios;
 
 import Clases.imprimir;
+import javax.swing.JOptionPane;
 
 public class menuMorosos extends javax.swing.JFrame {
 
@@ -40,9 +41,9 @@ public class menuMorosos extends javax.swing.JFrame {
 
         cMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre" }));
 
-        cGrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Etapa 4", "Etapa 5", "Etapa 6", "Primero Primaria", "Segundo Primaria", "Tercero Primaria", "Cuarto Primaria", "Quinto Primaria", "Sexto Primaria", "Primero Basico", "Segundo Basico", "Tercero Basico", "4to Bachillerato", "5to Bachillerato", "4to Perito", "5to Perito", "6to Perito", "Bachillerato Por Madurez", "Ciclo I", "Ciclo II" }));
+        cGrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pre-Primaria", "Primaria", "Basico", "Diversificado", "Todos" }));
 
-        cano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2014", "2015", "2016" }));
+        cano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017", "2018", "2019" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,12 +95,13 @@ public class menuMorosos extends javax.swing.JFrame {
         imprimir nuevo  = new imprimir();
         String mes="";
         int ano;
+        String query="";
         if(String.valueOf(cMes.getSelectedItem()).equals("Enero")){
             mes="jan";
         }else if(String.valueOf(cMes.getSelectedItem()).equals("Febrero")){
             mes="feb";
         }else if(String.valueOf(cMes.getSelectedItem()).equals("Marzo")){
-            mes="marz";
+            mes="mar";
         }else if(String.valueOf(cMes.getSelectedItem()).equals("Abril")){
             mes="apr";
         }else if(String.valueOf(cMes.getSelectedItem()).equals("Mayo")){
@@ -120,13 +122,51 @@ public class menuMorosos extends javax.swing.JFrame {
         
         //año de la busquda
         ano=Integer.parseInt(String.valueOf(cano.getSelectedItem()));
-        
-        try {
-            nuevo.mostarMorosos(mes, ano, String.valueOf(cGrado.getSelectedItem()));
-            dispose();
-        } catch (Exception e) {
-            System.out.println("Error:"+e);
+        if (String.valueOf(cGrado.getSelectedItem()).equals("Pre-Primaria")) {
+            try {
+                query="SELECT inscripciones_"+ano+".cod,nom,ape,grado,jornada,inscripciones_"+ano+".ins,jan,feb,mar,apr,may,jun,jul,ago,sep,oct,nov FROM inscripciones_"+ano+" INNER JOIN cuotas_"+ano+" ON inscripciones_"+ano+".cod=cuotas_"+ano+".cod WHERE grado LIKE '%Etapa%' AND "+mes+" IS NULL AND estado='inscrito' ORDER BY ape ";
+                nuevo.mostarMorosos(query);
+                dispose();
+            } catch (Exception e) {
+                System.out.println("Error:" + e);
+            }
+        }else if (String.valueOf(cGrado.getSelectedItem()).equals("Primaria")){
+            try {
+                query="SELECT inscripciones_"+ano+".cod,nom,ape,grado,jornada,inscripciones_"+ano+".ins,jan,feb,mar,apr,may,jun,jul,ago,sep,oct,nov FROM inscripciones_"+ano+" INNER JOIN cuotas_"+ano+" ON inscripciones_"+ano+".cod=cuotas_"+ano+".cod WHERE grado LIKE '%Primaria%' AND "+mes+" IS NULL AND estado='inscrito' ORDER BY grado,ape";
+                nuevo.mostarMorosos(query);
+                dispose();
+            } catch (Exception e) {
+                System.out.println("Error:" + e);
+            }
+        }else if (String.valueOf(cGrado.getSelectedItem()).equals("Basico")){
+            try {
+                query="SELECT inscripciones_"+ano+".cod,nom,ape,grado,jornada,inscripciones_"+ano+".ins,jan,feb,mar,apr,may,jun,jul,ago,sep,oct,nov FROM inscripciones_"+ano+" INNER JOIN cuotas_"+ano+" ON inscripciones_"+ano+".cod=cuotas_"+ano+".cod WHERE grado LIKE '%Basico%' AND "+mes+" IS NULL AND estado='inscrito' ORDER BY grado,ape ";
+                nuevo.mostarMorosos(query);
+                dispose();
+            } catch (Exception e) {
+                System.out.println("Error:" + e);
+            }
+        }else if (String.valueOf(cGrado.getSelectedItem()).equals("Diversificado")){
+            try {
+                query="SELECT inscripciones_"+ano+".cod,nom,ape,grado,jornada,inscripciones_"+ano+".ins,jan,feb,mar,apr,may,jun,jul,ago,sep,oct,nov FROM inscripciones_"+ano+" INNER JOIN cuotas_"+ano+" ON inscripciones_"+ano+".cod=cuotas_"+ano+".cod WHERE grado LIKE '%Bachillerato%' AND "+mes+" IS NULL OR grado LIKE '%Perito%' AND "+mes+" IS NULL OR grado LIKE '%Secretariado%' AND "+mes+" IS NULL ORDER BY grado,ape ";
+                nuevo.mostarMorosos(query);
+                dispose();
+            } catch (Exception e) {
+                System.out.println("Error:" + e);
+            }
+        }else if (String.valueOf(cGrado.getSelectedItem()).equals("Todos")){
+            try {
+                query="SELECT inscripciones_"+ano+".cod,nom,ape,grado,jornada,inscripciones_"+ano+".ins,jan,feb,mar,apr,may,jun,jul,ago,sep,oct,nov FROM inscripciones_"+ano+" INNER JOIN cuotas_"+ano+" ON inscripciones_"+ano+".cod=cuotas_"+ano+".cod WHERE "+mes+" IS NULL ORDER BY grado,ape";
+                nuevo.mostarMorosos(query);
+                dispose();
+            } catch (Exception e) {
+                System.out.println("Error:" + e);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Intentelo otra vez.");
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

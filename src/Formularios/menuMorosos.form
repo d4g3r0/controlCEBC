@@ -112,27 +112,12 @@
     <Component class="javax.swing.JComboBox" name="cGrado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="20">
-            <StringItem index="0" value="Etapa 4"/>
-            <StringItem index="1" value="Etapa 5"/>
-            <StringItem index="2" value="Etapa 6"/>
-            <StringItem index="3" value="Primero Primaria"/>
-            <StringItem index="4" value="Segundo Primaria"/>
-            <StringItem index="5" value="Tercero Primaria"/>
-            <StringItem index="6" value="Cuarto Primaria"/>
-            <StringItem index="7" value="Quinto Primaria"/>
-            <StringItem index="8" value="Sexto Primaria"/>
-            <StringItem index="9" value="Primero Basico"/>
-            <StringItem index="10" value="Segundo Basico"/>
-            <StringItem index="11" value="Tercero Basico"/>
-            <StringItem index="12" value="4to Bachillerato"/>
-            <StringItem index="13" value="5to Bachillerato"/>
-            <StringItem index="14" value="4to Perito"/>
-            <StringItem index="15" value="5to Perito"/>
-            <StringItem index="16" value="6to Perito"/>
-            <StringItem index="17" value="Bachillerato Por Madurez"/>
-            <StringItem index="18" value="Ciclo I"/>
-            <StringItem index="19" value="Ciclo II"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Pre-Primaria"/>
+            <StringItem index="1" value="Primaria"/>
+            <StringItem index="2" value="Basico"/>
+            <StringItem index="3" value="Diversificado"/>
+            <StringItem index="4" value="Todos"/>
           </StringArray>
         </Property>
       </Properties>
@@ -141,9 +126,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="2014"/>
-            <StringItem index="1" value="2015"/>
-            <StringItem index="2" value="2016"/>
+            <StringItem index="0" value="2017"/>
+            <StringItem index="1" value="2018"/>
+            <StringItem index="2" value="2019"/>
           </StringArray>
         </Property>
       </Properties>

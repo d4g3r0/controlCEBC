@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MOROSOS2" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="45f2e7ae-225d-4159-b73b-33c97278bc0b">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="cobros"/>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MOROSOS" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="45f2e7ae-225d-4159-b73b-33c97278bc0b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="piSERVER"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="mes" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$P{mes}]]></defaultValueExpression>
-	</parameter>
-	<parameter name="ano" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<parameter name="grado" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
 		<![CDATA[SELECT
-     inscripciones_$P{ano}.cod,
-     inscripciones_$P{ano}.grado,
-     inscripciones_$P{ano}.jornada,
-     inscripciones_$P{ano}.nom,
-     inscripciones_$P{ano}.ape,
-     cuotas_$P{ano}.ins,
-     cuotas_$P{ano}.jan,
-     cuotas_$P{ano}.feb,
-     cuotas_$P{ano}.mar,
-     cuotas_$P{ano}.apr,
-     cuotas_$P{ano}.may,
-     cuotas_$P{ano}.jun,
-     cuotas_$P{ano}.jul,
-     cuotas_$P{ano}.ago,
-     cuotas_$P{ano}.sep,
-     cuotas_$P{ano}.oct,
-     cuotas_$P{ano}.nov
+    inscripciones_2018.cod,
+    inscripciones_2018.grado,
+    inscripciones_2018.jornada,
+    inscripciones_2018.nom,
+    inscripciones_2018.ape,
+	cuotas_2018.ins,
+	cuotas_2018.jan,
+	cuotas_2018.feb,
+	cuotas_2018.mar,
+	cuotas_2018.apr,
+	cuotas_2018.may,
+	cuotas_2018.jun,
+	cuotas_2018.jul,
+	cuotas_2018.ago,
+	cuotas_2018.sep,
+	cuotas_2018.oct,
+	cuotas_2018.nov
 FROM
-     cjm.inscripciones_$P{ano} INNER JOIN cjm.cuotas_$P{ano} ON inscripciones_$P{ano}.cod = cuotas_$P{ano}.cod
+     cebc.inscripciones_2018 INNER JOIN cebc.cuotas_2018 ON inscripciones_2018.cod = cuotas_2018.cod
 WHERE
-cjm.cuotas_$P{ano}.$P!{mes} IS NULL AND cjm.inscripciones_$P{ano}.grado=$P{grado}]]>
+	grado='Primero Primaria']]>
 	</queryString>
 	<field name="cod" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -93,10 +86,6 @@ cjm.cuotas_$P{ano}.$P!{mes} IS NULL AND cjm.inscripciones_$P{ano}.grado=$P{grado
 	</background>
 	<columnHeader>
 		<band height="70">
-			<image hAlign="Left">
-				<reportElement stretchType="RelativeToTallestObject" x="2" y="1" width="62" height="62" uuid="24033d25-a37b-4932-9e83-b8c0ce69b981"/>
-				<imageExpression class="java.lang.String"><![CDATA["reportes/escudo_cjm.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="3" y="50" width="60" height="20" forecolor="#010101" uuid="623fa86e-5d85-4806-a790-2cc0e8a690e6"/>
 				<textElement verticalAlignment="Bottom">
@@ -247,11 +236,11 @@ cjm.cuotas_$P{ano}.$P!{mes} IS NULL AND cjm.inscripciones_$P{ano}.grado=$P{grado
 				<text><![CDATA[NOVIEMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="63" y="5" width="269" height="25" uuid="651cdefa-65eb-462e-bf6f-8583e766a7ea"/>
+				<reportElement x="3" y="5" width="329" height="25" uuid="651cdefa-65eb-462e-bf6f-8583e766a7ea"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="20" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Colegio Mixto Juan Marcos]]></text>
+				<text><![CDATA[Colegio Mixto El Buen Camino]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="64" y="30" width="269" height="20" uuid="808a46b8-d8d3-49cc-9911-015533b7f1ca"/>
