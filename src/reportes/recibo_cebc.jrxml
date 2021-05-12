@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo_roca" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39d49c65-793e-4773-b9f6-62e8c398e6ef">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="code" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="serv" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM registro WHERE norecibo=$P{code} AND serv=$P{serv}]]>
+	</queryString>
+	<field name="no" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="norecibo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingreso" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gasto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serv" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="320" splitType="Stretch">
+			<image>
+				<reportElement x="201" y="1" width="372" height="55" uuid="70da7cb4-37df-46cf-b8c0-3a71d9b01319"/>
+				<imageExpression><![CDATA["reportes/banner_blanco_cebc.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="201" y="74" width="78" height="20" uuid="92995693-ff30-445e-8a87-e3889df58e59"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="97" width="69" height="20" uuid="e42d6df2-5d95-406a-9fed-100322892355"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibi de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="120" width="69" height="20" uuid="da706edc-19f2-4206-abe9-328eaa34dc27"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="203" width="115" height="20" uuid="f51607ea-395d-46da-8235-cd972ae3acdb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar y Fecha:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="194" y="1" width="1" height="319" uuid="f5632159-f577-4f43-95bf-307fe68e79df"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="279" y="74" width="100" height="20" uuid="0185c24a-3167-4168-8449-7ce89ea87bd3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{norecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="97" width="291" height="20" uuid="94ce2be3-a8f6-4b1a-905d-ff74450040e0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="442" y="43" width="53" height="20" uuid="49f90cad-43d2-408f-b783-7ee8d8ca2ec9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto:]]></text>
+			</staticText>
+			<textField pattern="Q#,##0.00;Q-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="494" y="43" width="78" height="20" uuid="1b6a422a-e299-4fe7-b315-56d344a92dd0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="122" width="291" height="40" uuid="8843ef31-d9af-44f8-aae9-bebb07a11a06">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="316" y="203" width="87" height="20" uuid="8813bee7-d72e-4157-9ec3-72f744f0cea7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Guatemala,"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="345" y="282" width="216" height="1" uuid="4ec74184-8399-4271-9d48-7c23cd282163"/>
+			</line>
+			<staticText>
+				<reportElement x="345" y="283" width="216" height="20" uuid="c3d877d0-fab2-48e1-bfb0-f23bf4ddf26b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Firma y Sello del Receptor]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="400" y="203" width="79" height="20" uuid="e2f7a82c-26de-4165-845f-71e09a6ee854"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h:mm a" isBlankWhenNull="true">
+				<reportElement x="480" y="203" width="79" height="20" uuid="b6ad46bc-73a6-4360-9ab8-1dcb11597ba0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="37" width="53" height="20" uuid="0acf46d9-ec1d-48e0-8930-da5a5005fcfb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="64" width="78" height="20" uuid="c54407c2-32d2-4887-84d0-1041adffc670"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="87" width="69" height="20" uuid="57e9a6cc-d80e-412b-b7e1-9c82a5bd821d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibi de:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="132" width="69" height="20" uuid="aad25916-7a2c-4b5e-b241-b6e2439cadbb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="227" width="53" height="20" uuid="24eb29f6-58d5-4d38-9f4f-0ad9a5b61b36"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="281" width="187" height="1" uuid="d922f485-eedc-4e47-aed9-f703313e1d46"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="283" width="188" height="20" uuid="26bab2a0-1ff2-4874-ac2b-2388ef848a40"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Firma y Sello del Receptor]]></text>
+			</staticText>
+			<textField pattern="Q#,##0.00;Q-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="54" y="37" width="78" height="20" uuid="6ce4409f-d071-4733-bd84-3f1eddf963e8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="79" y="64" width="100" height="20" uuid="0c531d55-deac-4b13-9067-0d48ad873bc4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{norecibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="108" width="188" height="20" uuid="d3df1fea-9030-4b46-b736-24986765c421"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="152" width="187" height="75" uuid="bfbc57a0-12b8-41f6-8b94-b2745856c41e"/>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="54" y="227" width="79" height="20" uuid="2fe5c5f5-d4f8-47c3-ba1a-15dc6167833a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="0" width="187" height="36" uuid="1b67de4f-5864-483f-ad9c-57db8201862e"/>
+				<imageExpression><![CDATA["reportes/banner_blanco_cebc.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="1" y="319" width="572" height="1" uuid="4c7328d8-6497-46a4-aa0e-ed387604bdf2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="163" width="291" height="40" uuid="8152ba2d-503c-45cd-a0b2-b688c8f9ccbc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepuestoReciboAcademia" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa024096-4c50-4b95-bf6a-b7334c2c21de">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numero" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="centro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM registro WHERE norecibo=$P{numero} AND serv=$P{centro}]]>
+	</queryString>
+	<field name="no" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="norecibo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ingreso" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="gasto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="serv" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="309" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement positionType="Float" x="0" y="2" width="552" height="95" uuid="d24071e4-7f49-430e-a901-65c8c8d87199"/>
+				<imageExpression><![CDATA["reportes/banner_recibo.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="126" y="162" width="361" height="64" uuid="1caef373-81ce-40d1-809b-cc04eeacb9c4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="53" y="97" width="70" height="20" uuid="8b91038e-974c-4e94-9b53-c9a8500979f2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="97" width="79" height="20" uuid="06323707-9487-434f-8984-cf2b26869322"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Q.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="129" width="70" height="20" uuid="4228f2f7-b0ac-4fae-9983-d781d8b8c397"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="162" width="70" height="20" uuid="60ead2a2-9008-433e-89ea-a4c930fc5837"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="246" width="89" height="20" uuid="f10d0f73-dd7c-4fce-b2d0-f5e80cb16d89"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar y Fecha:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="126" y="97" width="50" height="20" uuid="7401bd22-9798-42be-98eb-a2b0eaf4df58"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{norecibo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="126" y="129" width="361" height="20" uuid="a2fd55c1-26ad-4c1a-acff-d363220b4255"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="140" y="162" width="349" height="20" uuid="0ba6bbce-8e45-4deb-8adf-a285ccec12d6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="429" y="97" width="60" height="20" uuid="39d63b11-8503-45f1-8a88-4c95622b4e1d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="159" y="246" width="128" height="20" uuid="270d9f1b-b7ec-45e2-8270-be34860a7305"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="93" y="246" width="72" height="20" uuid="36fb45c4-bcbd-4b18-a8c2-9eec14c319b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Guatemala, ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="302" y="266" width="250" height="1" uuid="af5242ac-210f-43c0-9ba2-5c044fedfa94"/>
+			</line>
+			<staticText>
+				<reportElement x="302" y="267" width="250" height="20" uuid="f00da4ca-23a4-4109-a56a-b1d91f03aa20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Firma y Sello]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="206" width="347" height="20" uuid="f032d9ed-ebb3-4cf6-86ae-32269aa420bc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="126" y="117" width="50" height="1" uuid="b66e4246-7a93-4d01-8a2d-ac2f94f0d992"/>
+			</line>
+			<line>
+				<reportElement x="126" y="149" width="361" height="1" uuid="06f4f191-13a0-42de-83f7-762b6ac39390"/>
+			</line>
+			<line>
+				<reportElement x="93" y="266" width="194" height="1" uuid="d1f5e9c0-5721-4e29-9393-772c7ee5ee18"/>
+			</line>
+			<line>
+				<reportElement x="429" y="117" width="60" height="1" uuid="8035163c-a0e0-4548-8a79-b77f7254b32b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="308" width="572" height="1" uuid="abe18ca8-4f04-4dc3-8b9c-defbe2985c25"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>
