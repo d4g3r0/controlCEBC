@@ -14,15 +14,31 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import java.io.FileReader;
+import java.util.Properties;
 public class imprimir {
 
     Connection conexx;
     Statement newst;
 
     public imprimir() {
+        String url="";
+        String usuario="";
+        String clave="";
+        //propiedades del archivo de configuración
+        try (FileReader lector = new FileReader("config")){
+            Properties propiedades =  new Properties();
+            propiedades.load(lector);
+            url="jdbc:mysql://"+propiedades.getProperty("ip")+"/"+propiedades.getProperty("bd");
+            usuario=propiedades.getProperty("user");
+            clave=propiedades.getProperty("password");  
+        } catch (Exception e) {
+            System.out.println("error, revisar archivo de configuración"+e);
+        }
+        //realizando la conexión
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.conexx = DriverManager.getConnection("jdbc:mysql://localhost/db", "usuario", "password");
+            this.conexx = DriverManager.getConnection(url,usuario,clave);
             this.newst = this.conexx.createStatement();
         } catch (ClassNotFoundException | SQLException eq) {
             JOptionPane.showMessageDialog(null, eq, "ADVERTENCIA", 2);

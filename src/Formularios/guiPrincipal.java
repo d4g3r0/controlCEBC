@@ -3529,7 +3529,7 @@ public static String name;
     }//GEN-LAST:event_btnOtrosCobrosActionPerformed
 
     private void ins_btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ins_btnInscribirActionPerformed
-        //inscripciones 2021
+        //inscripciones 2022
         //obtener fecha
         Date hoy = new Date();
         SimpleDateFormat fechaSimple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -3540,7 +3540,7 @@ public static String name;
             conexion objConexion = new conexion();
             Connection cn = objConexion.conectar();
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2021 WHERE cod='" + ins_tCodigo.getText() + "'");
+            ResultSet rs = st.executeQuery("SELECT cod FROM inscripciones_2022 WHERE cod='" + ins_tCodigo.getText() + "'");
             while (rs.next()) {
                 codduplex = rs.getString("cod");
             }
@@ -3556,7 +3556,7 @@ public static String name;
             try {
                 conexion objConexion = new conexion();
                 Connection cn = objConexion.conectar();
-                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2021 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement st = cn.prepareStatement("INSERT INTO inscripciones_2022 (cod,nom,ape,fnac,addr,tel,mov,grado,jornada,obs,m_nom,m_dpi,m_prof,p_nom,p_dpi,p_prof,serv,ins,mens,ncuotas,exped,fins,obsc,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 st.setString(1, ins_tCodigo.getText());
                 st.setString(2, ins_tNombres.getText());
                 st.setString(3, ins_tApellidos.getText());
@@ -3583,11 +3583,11 @@ public static String name;
                 st.setString(24, "Inscrito");
                 st.execute();
                 //ingresamos el codigo al libro de cuotas
-                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2021 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
+                PreparedStatement st0 = cn.prepareStatement("INSERT INTO cuotas_2022 (cod) VALUES ('" + ins_tCodigo.getText() + "')");
                 st0.execute();
                 JOptionPane.showMessageDialog(null, "Inscripcion realizada EXITOSAMENTE!");
                 //impresion de ficha
-                String misql="SELECT * FROM inscripciones_2021 WHERE cod='"+ins_tCodigo.getText()+"'";
+                String misql="SELECT * FROM inscripciones_2022 WHERE cod='"+ins_tCodigo.getText()+"'";
                 imprimirFichas(String.valueOf(ins_servicio.getSelectedItem()), String.valueOf(ins_cJornada.getSelectedItem()), ins_tCodigo.getText(),misql);
                 objConexion.cerrarConexion();
                 //limpiamos el panel de inscripcion
